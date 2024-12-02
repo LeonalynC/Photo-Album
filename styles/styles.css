@@ -1,0 +1,120 @@
+body {
+    font-family: 'Playfair Display', serif;
+    background-color: #ffdfe9;
+    color: #4a4a4a;
+    line-height: 1.6;
+}
+
+.navbar {
+    text-align: center;
+    margin-bottom: 50px;
+    background-color: #f1e3f1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3, h4, h5 {
+    color: #d03e78;
+    margin-bottom: 10px;
+}
+
+input[type="text"], input[type="password"], input[type="file"], select {
+    font-size: 1.2em;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 2px solid #d03e78;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, select:focus {
+    border-color: #b03060;
+    outline: none;
+}
+
+input[type="submit"] {
+    background-color: #d03e78;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #b03060;
+    transform: scale(1.05);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.albumList, .insertPhotoForm, .createAlbumForm {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 80%;
+}
+
+.images {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.photoContainer {
+    background-color: #f9f9f9;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+    width: 50%;
+    padding: 15px;
+}
+
+.photoDescription {
+    padding: 15px;
+    text-align: left;
+}
+
+.short-input {
+    width: 70%;
+    max-width: 300px;
+}
+
+input[type="text"], input[type="password"], input[type="file"], select {
+    font-size: 1.2em;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 2px solid #d03e78;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+.edit-link, .delete-link {
+    color: rgb(255, 0, 106);
+    text-decoration: none; 
+}
+
+.edit-link:hover, .delete-link:hover {
+    text-decoration: underline;
+}
+.navbar a {
+    color: rgb(255, 0, 106); 
+    text-decoration: none; 
+}
+
+.navbar a:hover {
+    text-decoration: underline; 
+}
