@@ -1,6 +1,11 @@
 <?php
 require_once 'dbConfig.php';
 
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 function checkIfUserExists($pdo, $username) {
     $response = array();
     $sql = "SELECT * FROM user_accounts WHERE username = ?";
@@ -105,33 +110,24 @@ function insertPhoto($pdo, $photo_name, $username, $description, $album_id = nul
     }
 }
 
-function getAllPhotos($pdo, $username = null) {
-    if (empty($username)) {
-        $sql = "
-        SELECT photos.*, albums.album_name
-        FROM photos
-        LEFT JOIN albums ON photos.album_id = albums.album_id
-        ORDER BY photos.date_added DESC";
-        $stmt = $pdo->prepare($sql);
-        $executeQuery = $stmt->execute();
+function getAllPhotos($pdo, $username = null, $album_id = null) {
+    $params = [];
+    $sql = "SELECT photos.*, albums.album_name FROM photos LEFT JOIN albums ON photos.album_id = albums.album_id";
 
-        if ($executeQuery) {
-            return $stmt->fetchAll();
-        }
-    } else {
-        $sql = "
-        SELECT photos.*, albums.album_name
-        FROM photos
-        LEFT JOIN albums ON photos.album_id = albums.album_id
-        WHERE photos.username = ?
-        ORDER BY photos.date_added DESC";
-        $stmt = $pdo->prepare($sql);
-        $executeQuery = $stmt->execute([$username]);
-
-        if ($executeQuery) {
-            return $stmt->fetchAll();
-        }
+    if ($username) {
+        $sql .= " WHERE photos.username = ?";
+        $params[] = $username;
     }
+
+    if ($album_id) {
+        $sql .= $username ? " AND photos.album_id = ?" : " WHERE photos.album_id = ?";
+        $params[] = $album_id;
+    }
+
+    $sql .= " ORDER BY photos.date_added DESC";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    return $stmt->fetchAll();
 }
 
 function getPhotoByID($pdo, $photo_id) {
@@ -140,7 +136,6 @@ function getPhotoByID($pdo, $photo_id) {
     $stmt->execute([$photo_id]);
     return $stmt->fetch();
 }
-
 
 function deletePhoto($pdo, $photo_id) {
     $sql = "DELETE FROM photos WHERE photo_id = ?";
